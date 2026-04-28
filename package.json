@@ -1,0 +1,43 @@
+{
+  "name": "utils",
+  "version": "0.0.1",
+  "description": "Collection of node tools to help the developpement of node projects",
+  "keywords": [
+    "utils",
+    "node",
+    "tools"
+  ],
+  "homepage": "https://github.com/spatulox-discord/utils#readme",
+  "bugs": {
+    "url": "https://github.com/spatulox-discord/utils/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spatulox-discord/utils.git"
+  },
+  "license": "MIT",
+  "author": "Spatulox",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js",
+    "require": "./dist/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "build": "npm run type-check && rm -rf ./dist/ && tsup",
+    "test": "npm run type-check && tsx watch src/test/index.ts",
+    "patch": "npm run build && npm version patch",
+    "minor": "npm run build && npm version minor",
+    "major": "npm run build && npm version major",
+    "pub:patch": "npm run patch && npm publish --access public",
+    "pub:minor": "npm run minor && npm publish --access public",
+    "pub:major": "npm run major && npm publish --access public"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

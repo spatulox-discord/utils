@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "nodenext",
+    // "types": ["node"], // For typescript ^6.0.0
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true,
+
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "stripInternal": true,
+    "declarationMap": true,
+
+    /*Only use the es2021/dom lib*/ /*need for "replaceAll" for example*/
+    "lib": ["es2022", "dom"],
+
+    /*JSON*/
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+
+    /*Liting*/
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": false,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+
+  },
+  "exclude": ["tsup.config.ts"]
+}
