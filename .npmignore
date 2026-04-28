@@ -1,0 +1,25 @@
+# .npmignore
+
+# conf files
+tsconfig.json
+.env
+.env.HDFR_dev
+.env.SpatuloxTest
+.idea
+.gitattributes
+node_modules/
+
+
+# project files
+src/
+src_example
+handlers/
+*.ts
+
+# npm repo conf
+#!*.d.ts
+
+dist/**/*.d.ts
+!dist/index.d.ts
+
+dist/**/*.map
