@@ -1,5 +1,5 @@
 {
-  "name": "utils",
+  "name": "@spatulox/utils",
   "version": "0.0.1",
   "description": "Collection of node tools to help the developpement of node projects",
   "keywords": [
