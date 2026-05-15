@@ -4,8 +4,9 @@ import { FileManager } from './FileManager';
 import { Log } from '../utils/Log';
 
 export class CacheManager {
-    private static get cacheDir(){
-        return path.join(process.cwd(), `.utilscache`);
+    private static get cacheDir(): string {
+        const env = process.env.CACHE_FOLDER ? process.env.CACHE_FOLDER : '';
+        return path.join(process.cwd(), env, `.utilscache`);
     }
 
     private static cleanCacheId(key: string): string {
