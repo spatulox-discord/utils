@@ -30,12 +30,12 @@ export class CacheManager {
             return false;
         }
 
-        const cleanCacheId = cache_id.replace(/[^a-zA-Z0-9_-]/g, '_'); // Nettoie le nom
+        const cleanCacheId = this.cleanCacheId(cache_id)
         Log.info(`Creating cache file: ${cleanCacheId}.json`);
 
         return await FileManager.writeJsonFile(
             this.cacheDir,
-            this.cleanCacheId(cache_id),
+            cleanCacheId,
             initialData
         );
     }
