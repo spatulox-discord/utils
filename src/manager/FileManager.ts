@@ -112,6 +112,8 @@ export class FileManager {
             return false;
         }
 
+        let tmpPath: string | undefined;
+
         try {
             // Create directory structure recursively
             await fs.mkdir(directoryPath, { recursive: true });
@@ -125,11 +127,24 @@ export class FileManager {
             const filePath = path.join(directoryPath, `${cleanFilename}.json`);
             const jsonContent = JSON.stringify(data, null, 2);
 
-            await fs.writeFile(filePath, jsonContent);
+            // Atomic write: write to a temp file in the same directory, then rename it
+            tmpPath = `${filePath}.${process.pid}.${Date.now()}.${Math.random().toString(36).slice(2)}.tmp`;
+            const handle = await fs.open(tmpPath, 'w');
+            try {
+                await handle.writeFile(jsonContent);
+                await handle.sync();
+            } finally {
+                await handle.close();
+            }
+            await fs.rename(tmpPath, filePath);
+
             Log.info(`Successfully wrote data to ${filePath}`);
             return true;
 
         } catch (error) {
+            if (tmpPath) {
+                await fs.unlink(tmpPath).catch(() => {});
+            }
             const cleanFilename = filename.replace(/\.json$/i, '') || 'unknown';
             Log.error(`Failed to write file ${directoryPath}/${cleanFilename}.json: ${error}`);
             return false;
